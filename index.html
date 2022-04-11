@@ -29,15 +29,28 @@
         </style>
     </head>
     <body>
+
         <input type="button" value="night" 
         onclick="
-            document.querySelector('body').style.backgroundColor='black';
-            document.querySelector('body').style.color='white';
+            //만약 버튼의 value값이 night라면
+            if(this.value==='night'){
+                document.querySelector('body').style.backgroundColor='black';
+                document.querySelector('body').style.color='white';
+                this.value='day';
+            }
+            else{
+                //아니라면
+                document.querySelector('body').style.backgroundColor='white';
+                document.querySelector('body').style.color='black'; 
+                this.value='night';
+            }
             ">
+        <!--
         <input type="button" value="day" 
         onclick="
             document.querySelector('body').style.backgroundColor='white';
             document.querySelector('body').style.color='black';            ">
+       -->
         <h1><a href="index.html">WEB</a></h1>
 
         <div id="container">
