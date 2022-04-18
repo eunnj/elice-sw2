@@ -3,6 +3,7 @@
     <head>
         <title>WEB - Welcome</title>
         <meta charset="utf-8">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <style>
             h1{
                 border-bottom:10px solid green;
@@ -38,12 +39,14 @@
                 }
             }
             function night(){
-                document.querySelector('body').style.backgroundColor = 'black';
-                document.querySelector('body').style.color = 'white';
-                let as = document.querySelectorAll('a');
-                for(let i=0; i<as.length; i=i+1){
-                    as[i].style.color='white';
-                }
+                //document.querySelector('body').style.backgroundColor = 'black';
+                //document.querySelector('body').style.color = 'white';
+                $('body').css('backgroundColor','black').css('color','white');
+                // let as = document.querySelectorAll('a');
+                // for(let i=0; i<as.length; i=i+1){
+                //     as[i].style.color='white';
+                // }
+                $('a').css('color','white');
             }
             function day(){
                 document.querySelector('body').style.backgroundColor = 'white';
@@ -52,8 +55,11 @@
                 for(let i=0; i<as.length; i=i+1){
                     as[i].style.color='black';
                 } 
+                
             }
         </script>
+        <div id="target">toggle</div>
+        <input type="button" value="hide/show" onclick="$('#target').toggle();")>
         <input type="button" value="night" 
             onclick="
                 // 만약에 이 버튼의 value 값이 night라면 아래 코드가 실행되고, 
