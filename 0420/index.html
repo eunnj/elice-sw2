@@ -5,7 +5,10 @@
 </head>
 <body>
     <header>
-        <h1><a href="/">WEB</a></h1>
+        <h1><a href="/" onclick="
+            event.preventDefault();
+            welcome();
+            ">WEB</a></h1>
     </header>
     <nav>
         <ol>
@@ -50,7 +53,9 @@
                 </li>`).join('');
                 document.querySelector('nav>ol').innerHTML = tag;
             }
-        function wlecome(){}
+        function wlecome(){
+            document.querySelector('article').innerHTML = `<h2>Welcome</h2>Hello, WEB`;
+        }
         function read(){
             //3. 아이디와 일치하는 topics의 원소를 찾는다.
             const topic = topics.filter(e=>e.id === selectedId)[0];
