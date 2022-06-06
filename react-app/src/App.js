@@ -9,23 +9,36 @@ function HeaderTag() {
     </header>
   );
 }
+
+function Nav() {
+  return (
+    <nav>
+      <ol>
+        <li>
+          <a href="/read/1">html</a>
+        </li>
+        <li>
+          <a href="/read/2">css</a>
+        </li>
+      </ol>
+    </nav>
+  );
+}
+
+function Article() {
+  return (
+    <article>
+      <h2>Welcome</h2>
+      Hello,WEB!
+    </article>
+  );
+}
 function App() {
   return (
     <div>
       <HeaderTag />
-      <nav>
-        <ol>
-          <li>
-            <a href="/read/1">html</a>
-          </li>
-          <li>
-            <a href="/read/2">css</a>
-          </li>
-        </ol>
-      </nav>
-      <article>
-        <h2>Welcome</h2>
-      </article>
+      <Nav />
+      <Article />
     </div>
   );
 }
