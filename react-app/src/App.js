@@ -2,7 +2,7 @@ import "./App.css";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 
-function Header() {
+function Header(props) {
   return (
     <header>
       <h1>
@@ -11,6 +11,7 @@ function Header() {
           onClick={(event) => {
             console.log("event", event);
             event.preventDefault();
+            props.onSelect();
           }}
         >
           WWW
@@ -24,7 +25,15 @@ function Nav(props) {
   const liTags = props.data.map((e) => {
     return (
       <li key={e.id}>
-        <a href={"/read/" + e.id}>{e.title}</a>
+        <a
+          href={"/read/" + e.id}
+          onClick={(event) => {
+            event.preventDefault();
+            props.onSelect(e.id);
+          }}
+        >
+          {e.title}
+        </a>
       </li>
     );
   });
@@ -56,7 +65,12 @@ function App() {
           alert("Header!!!");
         }}
       />
-      <Nav data={topics} />
+      <Nav
+        data={topics}
+        onSelect={(id) => {
+          alert("Nav!!!," + id);
+        }}
+      />
       <Article title="Welcome" body="Hello, WEB!" />
 
       <ButtonGroup variant="contained" aria-label="outlined button group">
