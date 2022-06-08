@@ -53,7 +53,9 @@ function Article(props) {
   );
 }
 function App() {
-  let [mode, setMode] = useState("WELCOME");
+  const [mode, setMode] = useState("WELCOME");
+  const [id, setId] = useState(null);
+  console.log(mode, id);
   const topics = [
     { id: 1, title: "html", body: "html is..." },
     { id: 2, title: "css", body: "css is..." },
@@ -63,22 +65,28 @@ function App() {
   if (mode === "WELCOME") {
     content = <Article title="Welcome" body="Hello, WEB!" />;
   } else if (mode === "READ") {
-    content = <Article title="READ" body="Hello, READ!" />;
+    const topic = topics.filter((e) => {
+      if (e.id === id) {
+        return true;
+      } else {
+        return false;
+      }
+    })[0];
+    content = <Article title={topic.title} body={topic.body} />;
   }
 
   return (
     <div>
       <Header
         onSelect={() => {
-          // alert("Header!!!");
           setMode("WELCOME");
         }}
       />
       <Nav
         data={topics}
         onSelect={(id) => {
-          // alert("Nav!!!," + id);
           setMode("READ");
+          setId(id);
         }}
       />
       {content}
