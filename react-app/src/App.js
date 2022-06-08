@@ -1,44 +1,76 @@
 import "./App.css";
+import Button from "@mui/material/Button";
+import ButtonGroup from "@mui/material/ButtonGroup";
 
-function HeaderTag() {
+function Header() {
   return (
     <header>
       <h1>
-        <a href="/">Web</a>
+        <a
+          href="/"
+          onClick={(event) => {
+            console.log("event", event);
+            event.preventDefault();
+          }}
+        >
+          WWW
+        </a>
       </h1>
     </header>
   );
 }
 
-function Nav() {
+function Nav(props) {
+  const liTags = props.data.map((e) => {
+    return (
+      <li key={e.id}>
+        <a href={"/read/" + e.id}>{e.title}</a>
+      </li>
+    );
+  });
   return (
     <nav>
-      <ol>
-        <li>
-          <a href="/read/1">html</a>
-        </li>
-        <li>
-          <a href="/read/2">css</a>
-        </li>
-      </ol>
+      <ol>{liTags}</ol>
     </nav>
   );
 }
 
-function Article() {
+function Article(props) {
   return (
     <article>
-      <h2>Welcome</h2>
-      Hello,WEB!
+      <h2>{props.title}</h2>
+      {props.body}
     </article>
   );
 }
 function App() {
+  const topics = [
+    { id: 1, title: "html", body: "html is..." },
+    { id: 2, title: "css", body: "css is..." },
+  ];
+
   return (
     <div>
-      <HeaderTag />
-      <Nav />
-      <Article />
+      <Header
+        onSelect={() => {
+          alert("Header!!!");
+        }}
+      />
+      <Nav data={topics} />
+      <Article title="Welcome" body="Hello, WEB!" />
+
+      <ButtonGroup variant="contained" aria-label="outlined button group">
+        <Button
+          variant="outlined"
+          onClick={() => {
+            alert("create!");
+          }}
+        >
+          Create
+        </Button>
+        <Button variant="outlined">Update</Button>
+      </ButtonGroup>
+      <Button variant="outlined">Delete</Button>
     </div>
   );
 }
