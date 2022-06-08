@@ -1,7 +1,7 @@
 import "./App.css";
+import { useState } from "react";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
-
 function Header(props) {
   return (
     <header>
@@ -53,26 +53,35 @@ function Article(props) {
   );
 }
 function App() {
+  let [mode, setMode] = useState("WELCOME");
   const topics = [
     { id: 1, title: "html", body: "html is..." },
     { id: 2, title: "css", body: "css is..." },
   ];
+  let content = null;
+
+  if (mode === "WELCOME") {
+    content = <Article title="Welcome" body="Hello, WEB!" />;
+  } else if (mode === "READ") {
+    content = <Article title="READ" body="Hello, READ!" />;
+  }
 
   return (
     <div>
       <Header
         onSelect={() => {
-          alert("Header!!!");
+          // alert("Header!!!");
+          setMode("WELCOME");
         }}
       />
       <Nav
         data={topics}
         onSelect={(id) => {
-          alert("Nav!!!," + id);
+          // alert("Nav!!!," + id);
+          setMode("READ");
         }}
       />
-      <Article title="Welcome" body="Hello, WEB!" />
-
+      {content}
       <ButtonGroup variant="contained" aria-label="outlined button group">
         <Button
           variant="outlined"
