@@ -2,9 +2,15 @@ import "./App.css";
 import { useState } from "react";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
+import { padding } from "@mui/system";
+
 function Header(props) {
+  const myStyle = {
+    borderBottom: "1px solid skyblue",
+    padding: "10px",
+  };
   return (
-    <header>
+    <header style={myStyle}>
       <h1>
         <a
           href="/"
