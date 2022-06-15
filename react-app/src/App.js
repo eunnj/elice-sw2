@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { useState } from "react";
 import Button from "@mui/material/Button";
@@ -81,27 +80,14 @@ function Create(props) {
   );
 }
 function App() {
-  const [mode, setMode] = useState("WELCOME");
-  const [id, setId] = useState(null);
+  const [mode, setMode] = useState("WELCOME"); // todo 삭제 예정
+  const [id, setId] = useState(null); // todo 삭제 예정
   const [nextId, setNextId] = useState(3);
   const [topics, setTopics] = useState([
     { id: 1, title: "html", body: "html is ..." },
     { id: 2, title: "css", body: "css is ..." },
   ]);
-  let content = null;
-  if (mode === "WELCOME") {
-    content = <Article title="Welcome" body="Hello, WEB!"></Article>;
-  } else if (mode === "READ") {
-    const topic = topics.filter((e) => {
-      if (e.id === id) {
-        return true;
-      } else {
-        return false;
-      }
-    })[0];
-    content = <Article title={topic.title} body={topic.body}></Article>;
-  } else if (mode === "CREATE") {
-  }
+
   return (
     <div>
       <HeaderStyled onSelect={headerHandler()}></HeaderStyled>
