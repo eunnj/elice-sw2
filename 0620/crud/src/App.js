@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+
 function Header() {
   return (
     <header>
@@ -8,19 +10,37 @@ function Header() {
   );
 }
 
-function Nav() {
+function Nav(props) {
   return (
     <nav>
-      <ol></ol>
+      <ol>
+        {props.data.map((e) => {
+          return (
+            <li key={e.id}>
+              <a href={`read/${e.id}`}>{e.title}</a>
+            </li>
+          );
+        })}
+      </ol>
     </nav>
   );
 }
 
 function App() {
+  const [topics, setTopics] = useState([]);
+  const refreshTopics = async () => {
+    const resp = await fetch("http://localhost:3333/topics");
+    const result = await resp.json();
+    setTopics(result);
+  };
+  useEffect(() => {
+    refreshTopics();
+  }, []);
+  console.log(topics);
   return (
     <div>
       <Header></Header>
-      <Nav></Nav>
+      <Nav data={topics}></Nav>
     </div>
   );
 }
