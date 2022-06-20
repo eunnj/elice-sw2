@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
+import { Link, Routes, Route, useParams } from "react-router-dom";
 
 function Header() {
   return (
     <header>
       <h1>
-        <a href="/">WEB</a>
+        <Link to="/">WEB</Link>
       </h1>
     </header>
   );
@@ -17,7 +18,7 @@ function Nav(props) {
         {props.data.map((e) => {
           return (
             <li key={e.id}>
-              <a href={`read/${e.id}`}>{e.title}</a>
+              <Link to={`read/${e.id}`}>{e.title}</Link>
             </li>
           );
         })}
@@ -26,6 +27,25 @@ function Nav(props) {
   );
 }
 
+function Read(props) {
+  const param = useParams();
+  const id = Number(param.id);
+  const [topic, setTopic] = useState({ title: null, body: null });
+  const refreshTopic = async () => {
+    const resp = await fetch("http://localhost:3333/topics/" + id);
+    const result = await resp.json();
+    setTopic(result);
+  };
+  useEffect(() => {
+    refreshTopic();
+  }, []);
+  return (
+    <article>
+      <h2>{topic.title}</h2>
+      {topic.body}
+    </article>
+  );
+}
 function App() {
   const [topics, setTopics] = useState([]);
   const refreshTopics = async () => {
@@ -41,6 +61,17 @@ function App() {
     <div>
       <Header></Header>
       <Nav data={topics}></Nav>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <h2>Welcome</h2>Hello, React!
+            </>
+          }
+        ></Route>
+        <Route path="/read/:id" element={<Read></Read>}></Route>
+      </Routes>
     </div>
   );
 }
