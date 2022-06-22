@@ -1,14 +1,11 @@
 import "./App.css";
-import { useReducer } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 function Left1(props) {
   return (
     <div>
       <h1>Left1</h1>
-      <Left2
-        onUp={() => {
-          props.onUp();
-        }}
-      ></Left2>
+      <Left2></Left2>
     </div>
   );
 }
@@ -16,21 +13,18 @@ function Left2(props) {
   return (
     <div>
       <h1>Left2</h1>
-      <Left3
-        onUp={() => {
-          props.onUp();
-        }}
-      ></Left3>
+      <Left3></Left3>
     </div>
   );
 }
 function Left3(props) {
+  const dispatch = useDispatch();
   return (
     <div>
       <h1>Left3</h1>
       <button
         onClick={() => {
-          props.onUp();
+          dispatch({ type: "UP", step: 2 });
         }}
       >
         +
@@ -42,7 +36,7 @@ function Right1(props) {
   return (
     <div>
       <h1>Right1</h1>
-      <Right2 count={props.count}></Right2>
+      <Right2></Right2>
     </div>
   );
 }
@@ -50,42 +44,28 @@ function Right2(props) {
   return (
     <div>
       <h1>Right2</h1>
-      <Right3 count={props.count}></Right3>
+      <Right3></Right3>
     </div>
   );
 }
 function Right3(props) {
+  const value = useSelector((state) => {
+    return state.value;
+  });
   return (
     <div>
       <h1>Right3</h1>
-      {props.count}
+      {value}
     </div>
   );
 }
 export default function App() {
-  const countReducer = (state, action) => {
-    if (action.type === "UP") {
-      return { ...state, value: state.value + action.step };
-    }
-    return state;
-  };
-  const initialState = {
-    value: 0,
-  };
-  const [count, dispatch] = useReducer(countReducer, initialState);
-  const up = (step) => {
-    return { type: "UP", step: step };
-  };
   return (
     <div id="app">
       <h1>Root</h1>
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
-        <Left1
-          onUp={() => {
-            dispatch(up(1));
-          }}
-        ></Left1>
-        <Right1 count={count.value}></Right1>
+        <Left1></Left1>
+        <Right1></Right1>
       </div>
     </div>
   );
